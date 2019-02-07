@@ -3,8 +3,8 @@ class WorldInData::CLI
 
 	def call
 		puts ""
-		puts "Welcome to the World In Data!".colorize(:blue)
-		puts "Here are the most recent articles:".colorize(:blue)
+		puts "Welcome to the World In Data!".colorize(:color => :blue, :background => :white)
+		puts "Here are the most recent articles:".colorize(:color => :blue, :background => :white)
 		WorldInData::Scraper.new.scrape_articles
 		display_articles
 		puts ""
@@ -18,8 +18,8 @@ class WorldInData::CLI
 			puts "#{i+1}. #{article.title}"
 		end
 		puts ""
-		puts "Which article would you like to read today?".colorize(:blue)
-		puts "Please enter its number.".blue.on_red.blink
+		puts "Which article would you like to read today?".colorize(:color => :blue, :background => :white)
+		puts "Please enter its number:".blue.on_white.blink
 		puts ""
 	end
 
@@ -30,7 +30,7 @@ class WorldInData::CLI
 			if input.to_i-1 <= WorldInData::Article.all.size
 				article = WorldInData::Article.all[input.to_i-1]
 				puts ""
-				puts article.title.colorize(:color => :white, :background => :red)
+				puts article.title.colorize(:color => :blue, :background => :white)
 				puts ""
 				puts WorldInData::Article.content_description(article.url)
 				puts ""
