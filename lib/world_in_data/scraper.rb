@@ -4,6 +4,11 @@ class WorldInData::Scraper
 		@url = url
 	end
 
+	def scrape_description
+		@doc = Nokogiri::HTML(open(@url))
+		@doc.css(".article-content p")[0].text
+	end
+
 	def scrape_articles
 		@doc = Nokogiri::HTML(open('https://ourworldindata.org/blog'))
 		articles = page.css("li.post")
@@ -16,4 +21,7 @@ class WorldInData::Scraper
   			:url => "https://ourworldindata.org#{article.css("a").attribute("href")}"}
 		end
 	end
+
+
+
 end
