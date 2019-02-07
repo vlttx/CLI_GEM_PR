@@ -1,0 +1,2 @@
+class WorldInData::Article
+end
