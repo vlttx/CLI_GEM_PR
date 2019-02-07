@@ -1,7 +1,7 @@
 class WorldInData::Article
 
 	attr_accessor :title, :date, :author, :url, :description
-	
+
 	@@all = []
 
 
@@ -9,8 +9,9 @@ class WorldInData::Article
 		@@all 
 	end
 
-	def content_description
+	def self.content_description(url)
 		@description = WorldInData::Scraper.new(url).scrape_description
+		@description.gsub("  ", " ")
 	end
 
 	def open_in_browser
