@@ -1,6 +1,7 @@
 class WorldInData::Article
 
 	attr_accessor :title, :date, :author, :url, :description
+	
 	@@all = []
 
 
