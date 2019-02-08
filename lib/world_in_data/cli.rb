@@ -40,7 +40,7 @@ class WorldInData::CLI
 		elsif @input.to_i-1 < WorldInData::Article.all.size
 			@article = WorldInData::Article.all[@input.to_i-1]
 			puts ""
-			puts @article.title.colorize(:color => :blue, :background => :white)
+			puts @article.title.colorize(:color => :black, :background => :white)
 			puts ""
 			puts @article.content_description
 			puts ""
@@ -48,7 +48,8 @@ class WorldInData::CLI
 			puts ""
 			puts "Posting date: #{@article.date}" 
 			puts ""
-			puts "Prefer to see the full article and data visualization?\nEnter Y or YES to open in your browser.".colorize(:blue)
+			puts "Prefer to see the full article and data visualization?".colorize(:blue)
+			puts "Enter Y or YES to open in your browser.".colorize(:blue)
 			puts ""
 			puts "To go back to the list, enter LIST.".colorize(:blue)
 			puts ""
@@ -62,7 +63,9 @@ class WorldInData::CLI
 	def after_selection_choices
 		if @input.upcase == "Y" || @input.upcase == "YES"
 			@article.open_in_browser
+			puts ""
 			puts "To see the list again, type LIST, to exit, type EXIT.".colorize(:blue)
+			puts ""
 			@input = gets.strip.upcase
 			initial_input_checker
 		elsif @input == "LIST"
@@ -81,19 +84,20 @@ class WorldInData::CLI
 			display_articles
 		elsif @input.to_i.to_s != @input
 			puts ""
-			puts "Your entry is invalid. Please enter a number from the list above.".colorize(:blue)
+			puts "Your entry is invalid. Please enter a number from the list above.".white.on_red.blink
 			puts ""
 		elsif @input.to_i-1 > WorldInData::Article.all.size
 			puts ""
-			puts "This number is too high. Enter article number from the list above or exit.".colorize(:blue)
+			puts "This number is too high. Enter article number from the list above or exit.".white.on_red.blink
 			puts ""
 		elsif @input.to_i-1 <= WorldInData::Article.all.size
 			display_selected_article
+			after_selection_choices
 		elsif @input.upcase == "Y" || @input == "YES"
 			after_selection_choices
 		else
 			puts ""
-			puts "Your entry is invalid. Please enter a number from the list above.".colorize(:blue)
+			puts "Your entry is invalid. Please enter a number from the list above.".white.on_red.blink
 			puts ""
 			@input = gets.strip
 			initial_input_checker
@@ -102,7 +106,7 @@ class WorldInData::CLI
 
 	def goodbye_message
 		puts ""
-		puts "Goodbye! See you next time!".colorize(:blue)
+		puts "Goodbye! See you next time!".colorize(:color => :blue, :background => :white)
 		puts ""
 		exit
 	end
