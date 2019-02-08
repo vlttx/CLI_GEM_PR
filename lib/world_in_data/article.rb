@@ -9,8 +9,12 @@ class WorldInData::Article
 		@@all 
 	end
 
-	def self.content_description(url)
-		@description = WorldInData::Scraper.new(url).scrape_description
+	def initialize
+		
+	end
+
+	def content_description
+		@description ||= WorldInData::Scraper.new(url).scrape_description
 		@description.gsub("  ", " ")
 	end
 

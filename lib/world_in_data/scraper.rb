@@ -13,6 +13,7 @@ class WorldInData::Scraper
 		@doc = Nokogiri::HTML(open('https://ourworldindata.org/blog'))
 		@doc.css("li.post").each do |scraped_article|
 			article = WorldInData::Article.new
+			
 			article.title = scraped_article.css("a h3").text.gsub("\u00E2\u0080\u0099", "'").gsub("\u00E2\u0082\u0082", "2")
 			article.date = scraped_article.css(".entry-meta time").text
 			article.author = scraped_article.css(".entry-meta").children[1].text.gsub(" by ", "")
