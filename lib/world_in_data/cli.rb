@@ -31,15 +31,9 @@ class WorldInData::CLI
 		end
 
 	def display_selected_article
-		if @input.to_i-1 >= WorldInData::Article.all.size
-			puts ""
-			puts "This number is too high. Enter article number from the list above or exit.".colorize(:blue)
-			puts ""
-		elsif @input.to_i-1 < WorldInData::Article.all.size
 			@article = WorldInData::Article.find_selected_article(@input)
 			WorldInData::Article.print_selected_article
 			@input = gets.strip.upcase
-		end
 	end
 
 
