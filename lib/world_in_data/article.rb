@@ -4,7 +4,6 @@ class WorldInData::Article
 
 	@@all = []
 
-
 	def self.all
 		@@all 
 	end
