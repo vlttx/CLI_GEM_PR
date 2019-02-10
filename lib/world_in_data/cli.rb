@@ -13,9 +13,7 @@ class WorldInData::CLI
 
 	def display_articles
 		puts ""
-		WorldInData::Article.all.each_with_index do |article, i|
-		puts "#{i+1}. #{article.title}"
-		end
+		WorldInData::Article.display_all
 		puts ""
 		puts "Which article would you like to read today?".colorize(:blue)
 		puts "Please enter its number:".blue.on_white.blink
@@ -38,25 +36,8 @@ class WorldInData::CLI
 			puts "This number is too high. Enter article number from the list above or exit.".colorize(:blue)
 			puts ""
 		elsif @input.to_i-1 < WorldInData::Article.all.size
-			@article = WorldInData::Article.all[@input.to_i-1]
-			puts ""
-			puts @article.title.colorize(:blue)
-			puts ""
-			puts @article.content_description
-			puts ""
-			puts "Author(s): #{@article.author}"
-			puts ""
-			puts "Posting date: #{@article.date}" 
-			puts ""
-			puts "Prefer to see the full article and data visualization?".colorize(:blue)
-			puts "Enter Y or YES to open in your browser.".colorize(:blue)
-			puts ""
-			puts "To go back to the list, enter LIST.".colorize(:blue)
-			puts ""
-			puts "To read another article from the list, just enter its number.".colorize(:blue)
-			puts ""
-			puts "To exit, enter EXIT".colorize(:blue)
-			puts ""
+			@article = WorldInData::Article.find_selected_article(@input)
+			WorldInData::Article.print_selected_article
 			@input = gets.strip.upcase
 		end
 	end
