@@ -2,12 +2,12 @@ class WorldInData::CLI
 
 
 	def call
-		puts ""
+		puts
 		puts "Welcome to the World In Data!".colorize(:blue)
 		puts "Here are the most recent articles:".colorize(:blue)
 		WorldInData::Scraper.new.scrape_articles
 		display_articles
-		puts ""
+		puts
 		menu	
 	end
 
@@ -17,8 +17,9 @@ class WorldInData::CLI
 		puts ""
 		puts "Which article would you like to read today?".colorize(:blue)
 		puts "Please enter its number:".blue.on_white.blink
-		puts ""
+		puts 
 	end
+
 
 	def menu
 		@input = nil
@@ -32,7 +33,24 @@ class WorldInData::CLI
 
 	def display_selected_article
 			@article = WorldInData::Article.find_selected_article(@input)
-			WorldInData::Article.print_selected_article
+			puts ""
+			puts @article.title.colorize(:blue)
+			puts ""
+			puts @article.content_description
+			puts ""
+			puts "Author(s): #{@article.author}"
+			puts ""
+			puts "Posting date: #{@article.date}" 
+			puts ""
+			puts "Prefer to see the full article and data visualization?".colorize(:blue)
+			puts "Enter Y or YES to open in your browser.".colorize(:blue)
+			puts ""
+			puts "To go back to the list, enter LIST.".colorize(:blue)
+			puts ""
+			puts "To read another article from the list, just enter its number.".colorize(:blue)
+			puts ""
+			puts "To exit, enter EXIT".colorize(:blue)
+			puts ""
 			@input = gets.strip.upcase
 	end
 
